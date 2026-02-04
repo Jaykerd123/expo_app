@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { UserContext } from '../UserContext';
+import { Colors } from '../theme';
 
 export default function HomeScreen({ navigation }) {
   const { user, logout } = useContext(UserContext);
@@ -9,7 +10,7 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Welcome, {displayName}</Text>
+      <Text style={styles.title}>🔥 Welcome, {displayName}</Text>
 
       <TouchableOpacity
         style={styles.button}
@@ -37,32 +38,33 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: Colors.background,
   },
   title: {
     fontSize: 24,
     fontWeight: '700',
     marginTop: 40,
     marginBottom: 20,
+    color: Colors.earth,
   },
   button: {
     width: '80%',
     padding: 15,
-    backgroundColor: '#007AFF',
+    backgroundColor: Colors.forest,
     borderRadius: 8,
     alignItems: 'center',
     marginTop: 12,
   },
   buttonText: {
-    color: '#fff',
+    color: Colors.textOnForest,
     fontWeight: '600',
   },
   logout: {
-    backgroundColor: '#fff',
+    backgroundColor: Colors.tan,
     borderWidth: 1,
-    borderColor: '#FF3B30',
+    borderColor: Colors.earth,
   },
   logoutText: {
-    color: '#FF3B30',
+    color: Colors.earth,
   },
 });

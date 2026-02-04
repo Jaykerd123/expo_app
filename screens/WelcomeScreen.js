@@ -1,10 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Colors } from '../theme';
 
 export default function WelcomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.logo}>MyMultiScreenApp</Text>
+      <Text style={styles.logo}>⛺️ Campify</Text>
 
       <TouchableOpacity
         style={styles.button}
@@ -29,32 +30,33 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
-    backgroundColor: '#fff',
+    backgroundColor: Colors.background,
   },
   logo: {
-    fontSize: 32,
-    fontWeight: '700',
-    marginBottom: 40,
+    fontSize: 36,
+    fontWeight: '800',
+    marginBottom: 16,
+    color: Colors.forest,
   },
   button: {
     width: '80%',
     padding: 15,
-    backgroundColor: '#007AFF',
+    backgroundColor: Colors.forest,
     borderRadius: 8,
     alignItems: 'center',
     marginTop: 12,
   },
   buttonText: {
-    color: '#fff',
+    color: Colors.textOnForest,
     fontSize: 16,
     fontWeight: '600',
   },
   outline: {
-    backgroundColor: '#fff',
+    backgroundColor: Colors.tan,
     borderWidth: 1,
-    borderColor: '#007AFF',
+    borderColor: Colors.forest,
   },
   outlineText: {
-    color: '#007AFF',
+    color: Colors.forest,
   },
 });

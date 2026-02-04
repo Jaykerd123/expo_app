@@ -1,13 +1,14 @@
 import React, { useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { UserContext } from '../UserContext';
+import { Colors } from '../theme';
 
 export default function ProfileScreen({ navigation }) {
   const { user } = useContext(UserContext);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Profile</Text>
+      <Text style={styles.title}>Profile ⛺️</Text>
 
       <View style={styles.row}>
         <Text style={styles.label}>Name:</Text>
@@ -30,7 +31,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: '#fff',
+    backgroundColor: Colors.background,
   },
   title: {
     fontSize: 28,
@@ -38,6 +39,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
     marginBottom: 20,
     textAlign: 'center',
+    color: Colors.forest,
   },
   row: {
     flexDirection: 'row',
@@ -47,6 +49,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontWeight: '600',
+    color: Colors.earth,
   },
   value: {
     fontWeight: '400',
@@ -55,11 +58,11 @@ const styles = StyleSheet.create({
     marginTop: 30,
     alignSelf: 'center',
     padding: 12,
-    backgroundColor: '#007AFF',
+    backgroundColor: Colors.forest,
     borderRadius: 8,
   },
   buttonText: {
-    color: '#fff',
+    color: Colors.textOnForest,
     fontWeight: '600',
   },
 });

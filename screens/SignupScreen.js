@@ -8,6 +8,7 @@ import {
   Alert,
 } from 'react-native';
 import { UserContext } from '../UserContext';
+import { Colors } from '../theme';
 
 export default function SignupScreen({ navigation }) {
   const [name, setName] = useState('');
@@ -36,7 +37,7 @@ export default function SignupScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Sign Up</Text>
+      <Text style={styles.title}>Sign Up for Camp</Text>
 
       <TextInput
         style={styles.input}
@@ -85,36 +86,38 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: Colors.background,
   },
   title: {
     fontSize: 28,
     fontWeight: '700',
     marginTop: 40,
     marginBottom: 20,
+    color: Colors.forest,
   },
   input: {
     width: '100%',
     padding: 12,
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: Colors.forest,
+    backgroundColor: Colors.inputBackground,
     borderRadius: 8,
     marginBottom: 12,
   },
   button: {
     width: '100%',
     padding: 15,
-    backgroundColor: '#007AFF',
+    backgroundColor: Colors.forest,
     marginTop: 8,
     borderRadius: 8,
     alignItems: 'center',
   },
   buttonText: {
-    color: '#fff',
+    color: Colors.textOnForest,
     fontWeight: '600',
   },
   link: {
-    color: '#007AFF',
+    color: Colors.forest,
     marginTop: 14,
   },
 });
