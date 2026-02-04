@@ -15,11 +15,19 @@ export default function App() {
   return (
     <UserProvider>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Welcome">
-          <Stack.Screen name="Welcome" component={WelcomeScreen} />
-          <Stack.Screen name="Login" component={LoginScreen} />
-          <Stack.Screen name="SignUp" component={SignupScreen} />
-          <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Navigator
+          initialRouteName="Welcome"
+          screenOptions={{
+            headerTransparent: true,
+            headerTintColor: '#fff',
+            headerTitleStyle: { color: '#fff', fontWeight: '700' },
+            headerShadowVisible: false,
+          }}
+        >
+          <Stack.Screen name="Welcome" component={WelcomeScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="Login" component={LoginScreen} options={{ title: '', headerBackTitleVisible: false }} />
+          <Stack.Screen name="SignUp" component={SignupScreen} options={{ title: '', headerBackTitleVisible: false }} />
+          <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
           <Stack.Screen name="Profile" component={ProfileScreen} />
         </Stack.Navigator>
       </NavigationContainer>

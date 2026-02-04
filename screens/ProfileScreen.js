@@ -10,17 +10,43 @@ export default function ProfileScreen({ navigation }) {
     <View style={styles.container}>
       <Text style={styles.title}>Profile ⛺️</Text>
 
-      <View style={styles.row}>
-        <Text style={styles.label}>Name:</Text>
-        <Text style={styles.value}>{user?.name || 'N/A'}</Text>
+      <View style={styles.avatarRow}>
+        <View style={styles.avatar}>
+          <Text style={styles.avatarText}>{(user?.name || 'U').charAt(0)}</Text>
+        </View>
+        <View style={{ marginLeft: 12 }}>
+          <Text style={styles.profileName}>{user?.name || 'Guest User'}</Text>
+          <Text style={styles.profileSmall}>Camp Enthusiast • Member</Text>
+        </View>
       </View>
 
-      <View style={styles.row}>
-        <Text style={styles.label}>ID:</Text>
-        <Text style={styles.value}>{user?.id || 'N/A'}</Text>
+      <View style={[styles.infoCard, { marginTop: 18 }]}>
+        <View style={styles.row}>
+          <Text style={styles.label}>Member Since:</Text>
+          <Text style={styles.value}>2023</Text>
+        </View>
+        <View style={styles.row}>
+          <Text style={styles.label}>Email:</Text>
+          <Text style={styles.value}>you@example.com</Text>
+        </View>
+        <View style={styles.row}>
+          <Text style={styles.label}>Favorite:</Text>
+          <Text style={styles.value}>Tent Camping</Text>
+        </View>
       </View>
 
-      <TouchableOpacity style={styles.button} onPress={() => navigation.goBack()}>
+      <Text style={[styles.sectionTitle, { marginTop: 18 }]}>Badges</Text>
+      <View style={styles.badgesRow}>
+        <Text style={styles.badge}>🏕️ Camp Starter</Text>
+        <Text style={styles.badge}>🔥 Campfire Cook</Text>
+        <Text style={styles.badge}>🌲 Trail Blazer</Text>
+      </View>
+
+      <TouchableOpacity style={[styles.button, { marginTop: 22 }]} onPress={() => {}}>
+        <Text style={styles.buttonText}>Edit Profile</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={[styles.button, { marginTop: 12 }]} onPress={() => navigation.goBack()}>
         <Text style={styles.buttonText}>Back</Text>
       </TouchableOpacity>
     </View>
@@ -46,6 +72,49 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginVertical: 8,
     paddingHorizontal: 10,
+  },
+  avatarRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 8,
+  },
+  avatar: {
+    width: 72,
+    height: 72,
+    borderRadius: 36,
+    backgroundColor: Colors.tan,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  avatarText: {
+    fontSize: 28,
+    fontWeight: '700',
+    color: Colors.forest,
+  },
+  profileName: {
+    fontSize: 18,
+    fontWeight: '700',
+    color: Colors.forest,
+  },
+  profileSmall: {
+    color: Colors.earth,
+  },
+  infoCard: {
+    width: '100%',
+    padding: 12,
+    backgroundColor: 'rgba(255,255,255,0.9)',
+    borderRadius: 10,
+  },
+  badge: {
+    backgroundColor: 'rgba(255,255,255,0.9)',
+    paddingVertical: 8,
+    paddingHorizontal: 10,
+    borderRadius: 16,
+    marginRight: 8,
+  },
+  badgesRow: {
+    flexDirection: 'row',
+    marginTop: 8,
   },
   label: {
     fontWeight: '600',

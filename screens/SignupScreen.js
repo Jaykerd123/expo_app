@@ -42,6 +42,7 @@ export default function SignupScreen({ navigation }) {
       <TextInput
         style={styles.input}
         placeholder="Name"
+        placeholderTextColor="#666"
         value={name}
         onChangeText={setName}
       />
@@ -49,6 +50,7 @@ export default function SignupScreen({ navigation }) {
       <TextInput
         style={styles.input}
         placeholder="ID"
+        placeholderTextColor="#666"
         value={id}
         onChangeText={setId}
         autoCapitalize="none"
@@ -57,6 +59,7 @@ export default function SignupScreen({ navigation }) {
       <TextInput
         style={styles.input}
         placeholder="Password"
+        placeholderTextColor="#666"
         secureTextEntry
         value={password}
         onChangeText={setPassword}
@@ -65,6 +68,7 @@ export default function SignupScreen({ navigation }) {
       <TextInput
         style={styles.input}
         placeholder="Confirm Password"
+        placeholderTextColor="#666"
         secureTextEntry
         value={confirmPassword}
         onChangeText={setConfirmPassword}
@@ -85,22 +89,24 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
+    paddingTop: 40,
     alignItems: 'center',
     backgroundColor: Colors.background,
   },
   title: {
     fontSize: 28,
     fontWeight: '700',
-    marginTop: 40,
-    marginBottom: 20,
+    marginTop: 20,
+    marginBottom: 12,
     color: Colors.forest,
+    textAlign: 'center',
   },
   input: {
     width: '100%',
     padding: 12,
     borderWidth: 1,
-    borderColor: Colors.forest,
-    backgroundColor: Colors.inputBackground,
+    borderColor: Colors.earth,
+    backgroundColor: 'rgba(255,255,255,0.92)',
     borderRadius: 8,
     marginBottom: 12,
   },
@@ -111,6 +117,11 @@ const styles = StyleSheet.create({
     marginTop: 8,
     borderRadius: 8,
     alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.18,
+    shadowRadius: 2,
+    elevation: 2,
   },
   buttonText: {
     color: Colors.textOnForest,

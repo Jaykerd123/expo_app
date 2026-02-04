@@ -1,28 +1,30 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
 import { Colors } from '../theme';
 
 export default function WelcomeScreen({ navigation }) {
   return (
-    <View style={styles.container}>
-      <Text style={styles.logo}>⛺️ Campify</Text>
+    <ImageBackground source={require('../assets/background/camp.jpg')} style={styles.bg} resizeMode="cover">
+      <View style={styles.container}>
+        <Text style={styles.logo}>⛺️ Campify</Text>
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('Login')}
-      >
-        <Text style={styles.buttonText}>Login</Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('Login')}
+        >
+          <Text style={styles.buttonText}>Login</Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity
-        style={[styles.button, styles.outline]}
-        onPress={() => navigation.navigate('SignUp')}
-      >
-        <Text style={[styles.buttonText, styles.outlineText]}>Sign Up</Text>
-      </TouchableOpacity>
-    </View>
+        <TouchableOpacity
+          style={[styles.button, styles.outline]}
+          onPress={() => navigation.navigate('SignUp')}
+        >
+          <Text style={[styles.buttonText, styles.outlineText]}>Sign Up</Text>
+        </TouchableOpacity>
+      </View>
+    </ImageBackground>
   );
-}
+} 
 
 const styles = StyleSheet.create({
   container: {
@@ -30,7 +32,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
-    backgroundColor: Colors.background,
+    backgroundColor: 'transparent',
+  },
+  bg: {
+    flex: 1,
   },
   logo: {
     fontSize: 36,
