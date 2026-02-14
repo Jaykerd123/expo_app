@@ -9,13 +9,13 @@ import {
   useWindowDimensions,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useFonts, Oswald_600SemiBold } from '@expo-google-fonts/oswald';
+import { useFonts, RobotoSlab_600SemiBold } from '@expo-google-fonts/roboto-slab';
 
 export default function WelcomeScreen({ navigation }) {
   const { width } = useWindowDimensions();
 
   const [fontsLoaded] = useFonts({
-    Oswald_600SemiBold,
+    RobotoSlab_600SemiBold,
   });
 
   if (!fontsLoaded) return null;
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'flex-start',
-    paddingTop: 40, // 🔥 moved everything higher
+    paddingTop: 40,
   },
 
   logoSection: {
@@ -105,7 +105,8 @@ const styles = StyleSheet.create({
     lineHeight: 28,
     color: '#ffffff',
     textAlign: 'center',
-    fontFamily: 'Oswald_600SemiBold', // 🔥 camping font
+    fontFamily: 'RobotoSlab_600SemiBold',
+    letterSpacing: 0.8, // subtle premium feel
     textShadowColor: 'rgba(0,0,0,0.6)',
     textShadowOffset: { width: 0, height: 2 },
     textShadowRadius: 4,
@@ -132,8 +133,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#fff',
     fontSize: 18,
-    fontWeight: 'bold',
     letterSpacing: 1,
-    fontFamily: 'Oswald_600SemiBold',
+    fontFamily: 'RobotoSlab_600SemiBold',
   },
 });

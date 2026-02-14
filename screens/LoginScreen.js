@@ -6,22 +6,29 @@ import {
   StyleSheet,
   TouchableOpacity,
   Alert,
+  useWindowDimensions,
 } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { useFonts, RobotoSlab_600SemiBold } from '@expo-google-fonts/roboto-slab';
 import { UserContext } from '../UserContext';
-import { Colors } from '../theme';
 
 export default function LoginScreen({ navigation }) {
+  const { width } = useWindowDimensions();
+  const [fontsLoaded] = useFonts({
+    RobotoSlab_600SemiBold,
+  });
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const { user, login } = useContext(UserContext);
+
+  if (!fontsLoaded) return null;
 
   const handleLogin = () => {
     if (!username.trim() || !password) {
       Alert.alert('Error', 'Please fill in both fields.');
       return;
     }
-
-    // If a registered user exists, require matching credentials
     if (user && user.id) {
       if ((username === user.id || username === user.name) && password === user.password) {
         login(user.name, user.id);
@@ -30,7 +37,6 @@ export default function LoginScreen({ navigation }) {
         Alert.alert('Login Failed', 'Invalid username or password.');
       }
     } else {
-      // No registered user - accept non-empty credentials and navigate
       login(username, username);
       navigation.replace('Home');
     }
@@ -41,28 +47,39 @@ export default function LoginScreen({ navigation }) {
       <Text style={styles.title}>Login to Camp</Text>
 
       <TextInput
-        style={styles.input}
+        style={[styles.input, { width: Math.min(width * 0.9, 360) }]}
         placeholder="Email or Username"
-        placeholderTextColor="#666"
+        placeholderTextColor="rgba(255,255,255,0.6)"
         value={username}
         onChangeText={setUsername}
         autoCapitalize="none"
       />
 
       <TextInput
-        style={styles.input}
+        style={[styles.input, { width: Math.min(width * 0.9, 360) }]}
         placeholder="Password"
-        placeholderTextColor="#666"
+        placeholderTextColor="rgba(255,255,255,0.6)"
         secureTextEntry
         value={password}
         onChangeText={setPassword}
       />
 
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Login</Text>
+      <TouchableOpacity
+        activeOpacity={0.85}
+        onPress={handleLogin}
+        style={[styles.buttonWrapper, { width: Math.min(width * 0.9, 360) }]}
+      >
+        <LinearGradient
+          colors={['#FF8C42', '#4285F4']}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={styles.button}
+        >
+          <Text style={styles.buttonText}>Login</Text>
+        </LinearGradient>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
+      <TouchableOpacity onPress={() => navigation.navigate('SignUp')} style={{ marginTop: 16 }}>
         <Text style={styles.link}>Don't have an account? Sign Up</Text>
       </TouchableOpacity>
     </View>
@@ -72,47 +89,49 @@ export default function LoginScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-    paddingTop: 40,
+    backgroundColor: '#1e1e1e', // VS Code dark mode
     alignItems: 'center',
-    backgroundColor: Colors.background,
+    justifyContent: 'center',
+    paddingTop: 40,
   },
   title: {
     fontSize: 28,
-    fontWeight: '700',
-    marginTop: 20,
-    marginBottom: 12,
-    color: Colors.forest,
+    fontFamily: 'RobotoSlab_600SemiBold',
+    color: '#ffffff',
+    marginBottom: 24,
     textAlign: 'center',
   },
   input: {
-    width: '100%',
-    padding: 12,
+    paddingVertical: 14,
+    paddingHorizontal: 16,
     borderWidth: 1,
-    borderColor: Colors.earth,
-    backgroundColor: 'rgba(255,255,255,0.92)',
-    borderRadius: 8,
-    marginBottom: 12,
+    borderColor: 'rgba(255,255,255,0.6)',
+    borderRadius: 30,
+    color: '#ffffff',
+    marginBottom: 16,
+    backgroundColor: 'transparent',
+    fontFamily: 'RobotoSlab_600SemiBold',
+    fontSize: 16,
+  },
+  buttonWrapper: {
+    borderRadius: 30,
+    overflow: 'hidden',
+    marginTop: 8,
   },
   button: {
-    width: '100%',
-    padding: 15,
-    backgroundColor: Colors.accent,
-    marginTop: 8,
-    borderRadius: 8,
+    paddingVertical: 16,
+    borderRadius: 30,
     alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 2,
-    elevation: 2,
   },
   buttonText: {
-    color: Colors.textOnForest,
-    fontWeight: '600',
+    color: '#fff',
+    fontFamily: 'RobotoSlab_600SemiBold',
+    fontSize: 18,
+    letterSpacing: 1,
   },
   link: {
-    color: Colors.forest,
-    marginTop: 14,
+    color: 'rgba(255,255,255,0.7)',
+    textAlign: 'center',
+    fontSize: 14,
   },
 });
