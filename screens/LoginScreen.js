@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Alert,
   useWindowDimensions,
+  Image, // 👈 added
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useFonts, RobotoSlab_600SemiBold } from '@expo-google-fonts/roboto-slab';
@@ -44,6 +45,14 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
+
+      {/* 🔥 Added Image */}
+      <Image
+        source={require('../assets/images/yuru_camp.png')}
+        style={[styles.logo, { width: Math.min(width * 0.6, 220) }]}
+        resizeMode="contain"
+      />
+
       <Text style={styles.title}>Login to Camp</Text>
 
       <TextInput
@@ -79,9 +88,23 @@ export default function LoginScreen({ navigation }) {
         </LinearGradient>
       </TouchableOpacity>
 
+      <TouchableOpacity
+        activeOpacity={0.85}
+        onPress={() => Alert.alert('Google Login', 'Google sign-in coming soon.')}
+        style={[styles.googleButton, { width: Math.min(width * 0.9, 360) }]}
+      >
+        <Image
+          source={require('../assets/logo/google_logo.png')}
+          style={styles.googleIcon}
+          resizeMode="contain"
+        />
+        <Text style={styles.googleText}>Continue with Google</Text>
+      </TouchableOpacity>
+
       <TouchableOpacity onPress={() => navigation.navigate('SignUp')} style={{ marginTop: 16 }}>
         <Text style={styles.link}>Don't have an account? Sign Up</Text>
       </TouchableOpacity>
+
     </View>
   );
 }
@@ -89,10 +112,14 @@ export default function LoginScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1e1e1e', // VS Code dark mode
+    backgroundColor: '#1e1e1e',
     alignItems: 'center',
     justifyContent: 'center',
     paddingTop: 40,
+  },
+  logo: {
+    height: 160,
+    marginBottom: 20,
   },
   title: {
     fontSize: 28,
@@ -133,5 +160,25 @@ const styles = StyleSheet.create({
     color: 'rgba(255,255,255,0.7)',
     textAlign: 'center',
     fontSize: 14,
+  },
+  googleButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#fff',
+    paddingVertical: 14,
+    paddingHorizontal: 20,
+    borderRadius: 30,
+    marginTop: 16,
+    gap: 12,
+  },
+  googleIcon: {
+    width: 24,
+    height: 24,
+  },
+  googleText: {
+    color: '#1e1e1e',
+    fontFamily: 'RobotoSlab_600SemiBold',
+    fontSize: 16,
   },
 });
