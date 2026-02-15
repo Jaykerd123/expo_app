@@ -42,6 +42,8 @@ export default function HomeScreen({ navigation }) {
   const handleNavPress = (key) => {
     setActiveTab(key);
     if (key === 'Profile') navigation.navigate('Profile');
+    if (key === 'Message') navigation.navigate('Message');
+    if (key === 'Wishlist') navigation.navigate('Wishlist');
   };
 
   return (

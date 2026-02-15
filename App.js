@@ -6,8 +6,7 @@ import { UserProvider } from './UserContext';
 import WelcomeScreen from './screens/WelcomeScreen';
 import LoginScreen from './screens/LoginScreen';
 import SignupScreen from './screens/SignupScreen';
-import HomeScreen from './screens/HomeScreen';
-import ProfileScreen from './screens/ProfileScreen';
+import MainScreen from './screens/MainScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,8 +26,7 @@ export default function App() {
           <Stack.Screen name="Welcome" component={WelcomeScreen} options={{ headerShown: false }} />
           <Stack.Screen name="Login" component={LoginScreen} options={{ title: '', headerBackTitleVisible: false }} />
           <Stack.Screen name="SignUp" component={SignupScreen} options={{ title: '', headerBackTitleVisible: false }} />
-          <Stack.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
-          <Stack.Screen name="Profile" component={ProfileScreen} />
+          <Stack.Screen name="Home" component={MainScreen} options={{ headerShown: false }} />
         </Stack.Navigator>
       </NavigationContainer>
     </UserProvider>
