@@ -5,7 +5,6 @@ import {
   StyleSheet,
   TouchableOpacity,
   ImageBackground,
-  Image,
   useWindowDimensions,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -26,50 +25,62 @@ export default function WelcomeScreen({ navigation }) {
       style={styles.bg}
       resizeMode="cover"
     >
-      <View style={styles.container}>
-        
-        {/* Logo */}
-        <View style={styles.logoSection}>
-          <Image
-            source={require('../assets/logo/heya_logo.png')}
-            style={[
-              styles.logo,
-              { width: Math.min(width * 0.85, 360) }
-            ]}
-            resizeMode="contain"
-          />
-        </View>
+      {/* Dark overlay for readability */}
+      <LinearGradient
+        colors={['rgba(10,20,50,0.6)', 'rgba(5,10,30,0.95)']}
+        style={styles.overlay}
+      >
+        <View style={styles.container}>
 
-        {/* Description */}
-        <View style={styles.textSection}>
-          <Text style={styles.description}>
-            Discover the perfect campsites, plan your outdoor adventures, and
-            connect with fellow campers. Your next great escape awaits!
-            {"\n\n"}
-            Start exploring nature like never before and create unforgettable
-            memories under the stars.
-          </Text>
-        </View>
+          {/* Top Text Section */}
+          <View style={styles.textSection}>
+            <Text style={styles.welcome}>Welcome to</Text>
+            <Text style={styles.title}>Camply</Text>
 
-        {/* Button */}
-        <View style={styles.buttonSection}>
-          <TouchableOpacity
-            activeOpacity={0.85}
-            onPress={() => navigation.navigate('Login')}
-            style={styles.buttonWrapper}
-          >
-            <LinearGradient
-              colors={['#FF8C42', '#4285F4']}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 1 }}
-              style={styles.button}
+            <Text style={styles.subtitle}>
+              Connect with people and plan your next escape
+              with Camply
+            </Text>
+          </View>
+
+          {/* Bottom Buttons Section */}
+          <View style={styles.buttonSection}>
+
+            {/* Google Button */}
+            <TouchableOpacity
+              style={styles.googleButton}
+              activeOpacity={0.85}
             >
-              <Text style={styles.buttonText}>Get Started</Text>
-            </LinearGradient>
-          </TouchableOpacity>
-        </View>
+              <Text style={styles.googleText}>
+                Continue with Google
+              </Text>
+            </TouchableOpacity>
 
-      </View>
+            {/* Email Button */}
+            <TouchableOpacity
+              style={styles.emailButton}
+              activeOpacity={0.85}
+              onPress={() => navigation.navigate('Login')}
+            >
+              <Text style={styles.emailText}>
+                Continue with Email
+              </Text>
+            </TouchableOpacity>
+
+            {/* Login Instead */}
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Login')}
+              style={{ marginTop: 18 }}
+            >
+              <Text style={styles.loginText}>
+                Login instead
+              </Text>
+            </TouchableOpacity>
+
+          </View>
+
+        </View>
+      </LinearGradient>
     </ImageBackground>
   );
 }
@@ -79,61 +90,77 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
+  overlay: {
+    flex: 1,
+    paddingHorizontal: 30,
+    paddingTop: 90,
+    paddingBottom: 50,
+  },
+
   container: {
     flex: 1,
-    justifyContent: 'flex-start',
-    paddingTop: 40,
-  },
-
-  logoSection: {
-    alignItems: 'center',
-    marginTop: 10,
-  },
-
-  logo: {
-    height: 240,
-    aspectRatio: 1,
+    justifyContent: 'space-between',
   },
 
   textSection: {
-    marginTop: 0,
-    paddingHorizontal: 28,
+    alignItems: 'center',
   },
 
-  description: {
-    fontSize: 18,
-    lineHeight: 28,
+  welcome: {
+    fontSize: 20,
+    color: '#d0d6ff',
+    marginBottom: 5,
+  },
+
+  title: {
+    fontSize: 44,
     color: '#ffffff',
-    textAlign: 'center',
     fontFamily: 'RobotoSlab_600SemiBold',
-    letterSpacing: 0.8, // subtle premium feel
-    textShadowColor: 'rgba(0,0,0,0.6)',
-    textShadowOffset: { width: 0, height: 2 },
-    textShadowRadius: 4,
+    marginBottom: 15,
+  },
+
+  subtitle: {
+    fontSize: 15,
+    color: '#cfd8ff',
+    textAlign: 'center',
+    lineHeight: 22,
   },
 
   buttonSection: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    paddingBottom: 50,
-    paddingHorizontal: 40,
+    width: '100%',
   },
 
-  buttonWrapper: {
+  googleButton: {
+    backgroundColor: '#ffffff',
+    paddingVertical: 18,
     borderRadius: 30,
-    overflow: 'hidden',
+    alignItems: 'center',
+    marginBottom: 15,
   },
 
-  button: {
+  googleText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#111',
+  },
+
+  emailButton: {
+    borderWidth: 1.5,
+    borderColor: '#ffffff',
     paddingVertical: 18,
     borderRadius: 30,
     alignItems: 'center',
   },
 
-  buttonText: {
-    color: '#fff',
-    fontSize: 18,
-    letterSpacing: 1,
-    fontFamily: 'RobotoSlab_600SemiBold',
+  emailText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#ffffff',
+  },
+
+  loginText: {
+    color: '#b0b8ff',
+    textAlign: 'center',
+    fontSize: 14,
   },
 });

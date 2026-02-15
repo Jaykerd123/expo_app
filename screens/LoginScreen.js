@@ -7,9 +7,8 @@ import {
   TouchableOpacity,
   Alert,
   useWindowDimensions,
-  Image, // 👈 added
+  Image,
 } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
 import { useFonts, RobotoSlab_600SemiBold } from '@expo-google-fonts/roboto-slab';
 import { UserContext } from '../UserContext';
 
@@ -46,15 +45,16 @@ export default function LoginScreen({ navigation }) {
   return (
     <View style={styles.container}>
 
-      {/* 🔥 Added Image */}
+      {/* Anime Image */}
       <Image
         source={require('../assets/images/yuru_camp.png')}
         style={[styles.logo, { width: Math.min(width * 0.6, 220) }]}
         resizeMode="contain"
       />
 
-      <Text style={styles.title}>Login to Camp</Text>
+      <Text style={styles.title}>Login to Camply</Text>
 
+      {/* Input Boxes */}
       <TextInput
         style={[styles.input, { width: Math.min(width * 0.9, 360) }]}
         placeholder="Email or Username"
@@ -73,24 +73,19 @@ export default function LoginScreen({ navigation }) {
         onChangeText={setPassword}
       />
 
+      {/* Login Button */}
       <TouchableOpacity
         activeOpacity={0.85}
         onPress={handleLogin}
-        style={[styles.buttonWrapper, { width: Math.min(width * 0.9, 360) }]}
+        style={[styles.loginButton, { width: Math.min(width * 0.9, 360) }]}
       >
-        <LinearGradient
-          colors={['#FF8C42', '#4285F4']}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 1 }}
-          style={styles.button}
-        >
-          <Text style={styles.buttonText}>Login</Text>
-        </LinearGradient>
+        <Text style={styles.loginButtonText}>Login</Text>
       </TouchableOpacity>
 
+      {/* Google Login Button */}
       <TouchableOpacity
         activeOpacity={0.85}
-        onPress={() => Alert.alert('Google Login', 'Google sign-in coming soon.')}
+        onPress={() => Alert.alert('Google Login', 'Coming soon.')}
         style={[styles.googleButton, { width: Math.min(width * 0.9, 360) }]}
       >
         <Image
@@ -101,7 +96,8 @@ export default function LoginScreen({ navigation }) {
         <Text style={styles.googleText}>Continue with Google</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => navigation.navigate('SignUp')} style={{ marginTop: 16 }}>
+      {/* Sign Up Link */}
+      <TouchableOpacity onPress={() => navigation.navigate('SignUp')} style={{ marginTop: 18 }}>
         <Text style={styles.link}>Don't have an account? Sign Up</Text>
       </TouchableOpacity>
 
@@ -112,7 +108,7 @@ export default function LoginScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#1e1e1e',
+    backgroundColor: '#0c111e', // mostly black with subtle blue tint
     alignItems: 'center',
     justifyContent: 'center',
     paddingTop: 40,
@@ -129,56 +125,56 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   input: {
-    paddingVertical: 14,
-    paddingHorizontal: 16,
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.6)',
+    paddingVertical: 16,
+    paddingHorizontal: 20,
+    borderWidth: 1.5,
+    borderColor: '#ffffff',
     borderRadius: 30,
-    color: '#ffffff',
     marginBottom: 16,
     backgroundColor: 'transparent',
+    color: '#ffffff',
     fontFamily: 'RobotoSlab_600SemiBold',
     fontSize: 16,
   },
-  buttonWrapper: {
-    borderRadius: 30,
-    overflow: 'hidden',
-    marginTop: 8,
-  },
-  button: {
+  loginButton: {
+    backgroundColor: '#ffffff',
     paddingVertical: 16,
     borderRadius: 30,
     alignItems: 'center',
+    marginTop: 12,
   },
-  buttonText: {
-    color: '#fff',
+  loginButtonText: {
+    color: '#111111',
     fontFamily: 'RobotoSlab_600SemiBold',
     fontSize: 18,
     letterSpacing: 1,
-  },
-  link: {
-    color: 'rgba(255,255,255,0.7)',
-    textAlign: 'center',
-    fontSize: 14,
   },
   googleButton: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#fff',
+    borderWidth: 1.5,
+    borderColor: '#ffffff',
+    borderRadius: 30,
     paddingVertical: 14,
     paddingHorizontal: 20,
-    borderRadius: 30,
     marginTop: 16,
     gap: 12,
+    backgroundColor: 'transparent',
   },
   googleIcon: {
     width: 24,
     height: 24,
   },
   googleText: {
-    color: '#1e1e1e',
+    color: '#ffffff',
     fontFamily: 'RobotoSlab_600SemiBold',
     fontSize: 16,
+  },
+  link: {
+    color: 'rgba(255,255,255,0.7)',
+    textAlign: 'center',
+    fontSize: 14,
+    marginTop: 8,
   },
 });

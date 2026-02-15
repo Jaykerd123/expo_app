@@ -6,19 +6,26 @@ import {
   StyleSheet,
   TouchableOpacity,
   Alert,
+  useWindowDimensions,
 } from 'react-native';
+import { useFonts, RobotoSlab_600SemiBold } from '@expo-google-fonts/roboto-slab';
 import { UserContext } from '../UserContext';
-import { Colors } from '../theme';
 
 export default function SignupScreen({ navigation }) {
+  const { width } = useWindowDimensions();
+  const [fontsLoaded] = useFonts({
+    RobotoSlab_600SemiBold,
+  });
+
   const [name, setName] = useState('');
-  const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const { setUser, login } = useContext(UserContext);
 
+  if (!fontsLoaded) return null;
+
   const handleSignup = () => {
-    if (!name.trim() || !id.trim() || !password || !confirmPassword) {
+    if (!name.trim() || !password || !confirmPassword) {
       Alert.alert('Error', 'Please fill in all fields.');
       return;
     }
@@ -28,8 +35,7 @@ export default function SignupScreen({ navigation }) {
       return;
     }
 
-    // Save user and navigate to Home
-    const newUser = { name: name.trim(), id: id.trim(), password };
+    const newUser = { name: name.trim(), id: name.trim(), password };
     setUser(newUser);
     login(newUser.name, newUser.id);
     navigation.replace('Home');
@@ -37,48 +43,45 @@ export default function SignupScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Sign Up for Camp</Text>
+      <Text style={styles.title}>Sign Up for Camply</Text>
 
       <TextInput
-        style={styles.input}
+        style={[styles.input, { width: Math.min(width * 0.9, 360) }]}
         placeholder="Name"
-        placeholderTextColor="#666"
+        placeholderTextColor="rgba(255,255,255,0.6)"
         value={name}
         onChangeText={setName}
       />
 
       <TextInput
-        style={styles.input}
-        placeholder="ID"
-        placeholderTextColor="#666"
-        value={id}
-        onChangeText={setId}
-        autoCapitalize="none"
-      />
-
-      <TextInput
-        style={styles.input}
+        style={[styles.input, { width: Math.min(width * 0.9, 360) }]}
         placeholder="Password"
-        placeholderTextColor="#666"
+        placeholderTextColor="rgba(255,255,255,0.6)"
         secureTextEntry
         value={password}
         onChangeText={setPassword}
       />
 
       <TextInput
-        style={styles.input}
+        style={[styles.input, { width: Math.min(width * 0.9, 360) }]}
         placeholder="Confirm Password"
-        placeholderTextColor="#666"
+        placeholderTextColor="rgba(255,255,255,0.6)"
         secureTextEntry
         value={confirmPassword}
         onChangeText={setConfirmPassword}
       />
 
-      <TouchableOpacity style={styles.button} onPress={handleSignup}>
-        <Text style={styles.buttonText}>Sign Up</Text>
+      {/* Sign Up Button */}
+      <TouchableOpacity
+        activeOpacity={0.85}
+        onPress={handleSignup}
+        style={[styles.signupButton, { width: Math.min(width * 0.9, 360) }]}
+      >
+        <Text style={styles.signupButtonText}>Sign Up</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+      {/* Login Link */}
+      <TouchableOpacity onPress={() => navigation.navigate('Login')} style={{ marginTop: 16 }}>
         <Text style={styles.link}>Already have an account? Login</Text>
       </TouchableOpacity>
     </View>
@@ -88,47 +91,47 @@ export default function SignupScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-    paddingTop: 40,
+    backgroundColor: '#0c111e', // mostly black with subtle blue tint
     alignItems: 'center',
-    backgroundColor: Colors.background,
+    justifyContent: 'center',
+    paddingTop: 40,
   },
   title: {
     fontSize: 28,
-    fontWeight: '700',
-    marginTop: 20,
-    marginBottom: 12,
-    color: Colors.forest,
+    fontFamily: 'RobotoSlab_600SemiBold',
+    color: '#ffffff',
+    marginBottom: 24,
     textAlign: 'center',
   },
   input: {
-    width: '100%',
-    padding: 12,
-    borderWidth: 1,
-    borderColor: Colors.earth,
-    backgroundColor: 'rgba(255,255,255,0.92)',
-    borderRadius: 8,
-    marginBottom: 12,
+    paddingVertical: 16,
+    paddingHorizontal: 20,
+    borderWidth: 1.5,
+    borderColor: '#ffffff',
+    borderRadius: 30,
+    marginBottom: 16,
+    backgroundColor: 'transparent',
+    color: '#ffffff',
+    fontFamily: 'RobotoSlab_600SemiBold',
+    fontSize: 16,
   },
-  button: {
-    width: '100%',
-    padding: 15,
-    backgroundColor: Colors.forest,
-    marginTop: 8,
-    borderRadius: 8,
+  signupButton: {
+    backgroundColor: '#ffffff',
+    paddingVertical: 16,
+    borderRadius: 30,
     alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.18,
-    shadowRadius: 2,
-    elevation: 2,
+    marginTop: 12,
   },
-  buttonText: {
-    color: Colors.textOnForest,
-    fontWeight: '600',
+  signupButtonText: {
+    color: '#111111',
+    fontFamily: 'RobotoSlab_600SemiBold',
+    fontSize: 18,
+    letterSpacing: 1,
   },
   link: {
-    color: Colors.forest,
-    marginTop: 14,
+    color: 'rgba(255,255,255,0.7)',
+    textAlign: 'center',
+    fontSize: 14,
+    marginTop: 8,
   },
 });
