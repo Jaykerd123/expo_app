@@ -17,9 +17,10 @@ import { UserContext } from '../UserContext';
 const FILTER_TABS = ['All', 'Trending', 'Pets Allowed', 'Beach', 'Forest', 'Lake'];
 
 const CAMPSITES = [
-  { id: '1', name: 'Mount Kitanglad Camp', rating: 4.8, fee: 150, image: require('../assets/images/yuru_camp.png') },
-  { id: '2', name: 'Kaamulan Nature Park', rating: 4.5, fee: 200, image: require('../assets/images/yuru_camp.png') },
-  { id: '3', name: 'Pine Grove Campground', rating: 4.9, fee: 250, image: require('../assets/images/yuru_camp.png') },
+  { id: '1', name: 'Mount Kitanglad Camp', rating: 4.8, fee: 150, image: require('../assets/images/mt_kitanglad .jpg') },
+  { id: '2', name: 'Kaamulan Nature Park', rating: 4.5, fee: 200, image: require('../assets/images/kaamulan_park.jpg') },
+  { id: '3', name: 'Pine Grove Campground', rating: 4.9, fee: 250, image: require('../assets/images/pinegrove.jpg') },
+  { id: '4', name: 'Lake Apo Viewpoint', rating: 4.7, fee: 180, image: require('../assets/images/lake_apo.jpg') },
 ];
 
 export default function HomeScreen({ navigation }) {

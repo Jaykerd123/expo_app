@@ -21,7 +21,7 @@ export default function WelcomeScreen({ navigation }) {
 
   return (
     <ImageBackground
-      source={require('../assets/background/initial_page_bg.jpg')}
+      source={require('../assets/images/bg_tent.jpg')}
       style={styles.bg}
       resizeMode="cover"
     >

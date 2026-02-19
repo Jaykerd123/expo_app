@@ -47,10 +47,12 @@ export default function LoginScreen({ navigation }) {
 
       {/* Anime Image */}
       <Image
-        source={require('../assets/images/yuru_camp.png')}
-        style={[styles.logo, { width: Math.min(width * 0.6, 220) }]}
+        source={require('../assets/images/simple_tent.png')}
+        style={[styles.logo, { width: width * 1.1 }]}
         resizeMode="contain"
       />
+
+
 
       <Text style={styles.title}>Login to Camply</Text>
 

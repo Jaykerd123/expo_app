@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { UserContext } from '../UserContext';
 import { Colors } from '../theme';
 
@@ -8,7 +9,7 @@ export default function ProfileScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Profile ⛺️</Text>
+      <Text style={styles.title}>Profile</Text>
 
       <View style={styles.avatarRow}>
         <View style={styles.avatar}>
@@ -37,9 +38,18 @@ export default function ProfileScreen({ navigation }) {
 
       <Text style={[styles.sectionTitle, { marginTop: 18 }]}>Badges</Text>
       <View style={styles.badgesRow}>
-        <Text style={styles.badge}>🏕️ Camp Starter</Text>
-        <Text style={styles.badge}>🔥 Campfire Cook</Text>
-        <Text style={styles.badge}>🌲 Trail Blazer</Text>
+        <View style={styles.badge}>
+          <Ionicons name="bonfire-outline" size={16} color={Colors.forest} style={{ marginRight: 4 }} />
+          <Text>Camp Starter</Text>
+        </View>
+        <View style={styles.badge}>
+          <Ionicons name="restaurant-outline" size={16} color={Colors.forest} style={{ marginRight: 4 }} />
+          <Text>Campfire Cook</Text>
+        </View>
+        <View style={styles.badge}>
+          <Ionicons name="leaf-outline" size={16} color={Colors.forest} style={{ marginRight: 4 }} />
+          <Text>Trail Blazer</Text>
+        </View>
       </View>
 
       <TouchableOpacity style={[styles.button, { marginTop: 22 }]} onPress={() => {}}>
@@ -106,8 +116,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   badge: {
+    flexDirection: 'row',
+    alignItems: 'center',
     backgroundColor: 'rgba(255,255,255,0.9)',
-    paddingVertical: 8,
+    paddingVertical: 6,
     paddingHorizontal: 10,
     borderRadius: 16,
     marginRight: 8,
@@ -124,7 +136,6 @@ const styles = StyleSheet.create({
     fontWeight: '400',
   },
   button: {
-    marginTop: 30,
     alignSelf: 'center',
     padding: 12,
     backgroundColor: Colors.forest,
