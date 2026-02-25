@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import {
   View,
   Text,
@@ -11,6 +11,10 @@ import {
 } from 'react-native';
 import { useFonts, RobotoSlab_600SemiBold } from '@expo-google-fonts/roboto-slab';
 import { UserContext } from '../UserContext';
+import * as Google from 'expo-auth-session/providers/google';
+import { makeRedirectUri } from 'expo-auth-session';
+import { signInWithCredential, GoogleAuthProvider } from 'firebase/auth';
+import { auth } from '../firebase';
 
 export default function LoginScreen({ navigation }) {
   const { width } = useWindowDimensions();
@@ -21,6 +25,36 @@ export default function LoginScreen({ navigation }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const { user, login } = useContext(UserContext);
+
+  // Configure Google auth request
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    // TODO: replace these placeholder IDs with your OAuth client IDs
+    expoClientId: '<EXPO_CLIENT_ID>',
+    iosClientId: '<IOS_CLIENT_ID>',
+    androidClientId: '<ANDROID_CLIENT_ID>',
+    webClientId: '<WEB_CLIENT_ID>',
+    // redirectUri: makeRedirectUri({ useProxy: true }),
+  });
+
+  useEffect(() => {
+    if (response?.type === 'success') {
+      const { idToken, accessToken } = response.authentication || {};
+      const credential = GoogleAuthProvider.credential(idToken, accessToken);
+      signInWithCredential(auth, credential)
+        .then((res) => {
+          const u = res.user;
+          login(u.displayName || u.email || 'User', u.uid);
+          navigation.replace('Home');
+        })
+        .catch((err) => {
+          Alert.alert('Login Error', err.message || 'Failed to sign in with Firebase');
+        });
+    }
+  }, [response]);
+
+  useEffect(() => {
+    console.log('Google auth request ready:', !!request);
+  }, [request]);
 
   if (!fontsLoaded) return null;
 
@@ -87,7 +121,20 @@ export default function LoginScreen({ navigation }) {
       {/* Google Login Button */}
       <TouchableOpacity
         activeOpacity={0.85}
-        onPress={() => Alert.alert('Google Login', 'Coming soon.')}
+        onPress={async () => {
+          if (!request) {
+            Alert.alert('Please wait', 'Google sign-in is not ready yet.');
+            console.log('Google auth request not ready', { request });
+            return;
+          }
+          try {
+            const result = await promptAsync({ useProxy: true });
+            console.log('promptAsync result:', result);
+          } catch (err) {
+            console.error('promptAsync error', err);
+            Alert.alert('Sign-in error', err?.message || String(err));
+          }
+        }}
         style={[styles.googleButton, { width: Math.min(width * 0.9, 360) }]}
       >
         <Image
