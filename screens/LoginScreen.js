@@ -28,11 +28,12 @@ export default function LoginScreen({ navigation }) {
 
   // Configure Google auth request
   const [request, response, promptAsync] = Google.useAuthRequest({
-    // TODO: replace these placeholder IDs with your OAuth client IDs
-    expoClientId: '<EXPO_CLIENT_ID>',
-    iosClientId: '<IOS_CLIENT_ID>',
-    androidClientId: '<ANDROID_CLIENT_ID>',
-    webClientId: '<WEB_CLIENT_ID>',
+    // For Expo Go (proxy) development, use Web client ID
+    expoClientId: '657880389882-4fp132ekoi8uodlod46vl1i2uv8i01uo.apps.googleusercontent.com',
+    webClientId: '657880389882-4fp132ekoi8uodlod46vl1i2uv8i01uo.apps.googleusercontent.com',
+    // TODO: Add native client IDs for standalone Android/iOS builds
+    // iosClientId: '<IOS_CLIENT_ID>',
+    // androidClientId: '<ANDROID_CLIENT_ID>',
     // redirectUri: makeRedirectUri({ useProxy: true }),
   });
 
