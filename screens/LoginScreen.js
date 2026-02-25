@@ -26,15 +26,13 @@ export default function LoginScreen({ navigation }) {
   const [password, setPassword] = useState('');
   const { user, login } = useContext(UserContext);
 
-  // Configure Google auth request
+  // Configure Google auth request (using proxy for Expo Go development)
   const [request, response, promptAsync] = Google.useAuthRequest({
-    // For Expo Go (proxy) development, use Web client ID
-    expoClientId: '657880389882-4fp132ekoi8uodlod46vl1i2uv8i01uo.apps.googleusercontent.com',
     webClientId: '657880389882-4fp132ekoi8uodlod46vl1i2uv8i01uo.apps.googleusercontent.com',
-    // TODO: Add native client IDs for standalone Android/iOS builds
+    androidClientId: '657880389882-jju10veckt7h42jj0g655jr86gc20f4k.apps.googleusercontent.com',
+    redirectUri: makeRedirectUri({ useProxy: true }),
+    // For iOS standalone builds, add native client ID later:
     // iosClientId: '<IOS_CLIENT_ID>',
-    // androidClientId: '<ANDROID_CLIENT_ID>',
-    // redirectUri: makeRedirectUri({ useProxy: true }),
   });
 
   useEffect(() => {
